@@ -2,22 +2,46 @@ Template[getTemplate('users')].helpers({
   user_item: function () {
     return getTemplate('user_item');
   },
-  loadMoreUrl: function(){
-    var count = parseInt(Session.get('usersLimit')) + 20;
-    return '/all-users/' + count + '?filterBy='+this.filterBy+'&sortBy='+this.sortBy;
-  },
-  allPostsLoaded: function () {
-    return false;
-    //TODO: hide load more button when all users have been loaded
+  loadMoreUrl: function() {
+    if (this.users.count() < this.users.limit) {
+      return null;
+    }
+
+    var count = this.users.limit + 20;
+    return Router.path('all-users', {limit: count}, {
+      query: {
+        filterBy: this.filterBy,
+        sortBy: this.sortBy
+      }
+    });
   },
   activeClass: function (link) {
-    if(link == this.filterBy || link == this.sortBy)
-      return "active";
+    var parentData = Template.parentData();
+    if(link === parentData.filterBy || link === parentData.sortBy)
+      return 'active';
   },
   sortBy: function (parameter) {
-    return "?filterBy="+this.filterBy+"&sortBy="+parameter;
+    return "?filterBy="+Template.parentData().filterBy+"&sortBy="+parameter;
   },
   filterBy: function (parameter) {
-    return "?filterBy="+parameter+"&sortBy="+this.sortBy;
+    return "?filterBy="+parameter+"&sortBy="+Template.parentData().sortBy;
+  },
+  filters: function () {
+    return [
+      'all',
+      'invited',
+      'uninvited',
+      'admin'
+    ];
+  },
+  sorts: function () {
+    return [
+      {key: 'createdAt', textKey: 'created'},
+      {key: 'karma', textKey: 'karma'},
+      {key: 'username', textKey: 'username'},
+      {key: 'postCount', textKey: 'posts'},
+      {key: 'commentCount', textKey: 'comments_'},
+      {key: 'invitedCount', textKey: 'invitedcount'}
+    ];
   }
 });

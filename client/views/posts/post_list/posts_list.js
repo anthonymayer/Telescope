@@ -6,11 +6,6 @@ Template[getTemplate('posts_list')].helpers({
   postsLayout: function () {
     return getSetting('postsLayout', 'posts-list');
   },
-  description: function () {
-    var controller = Iron.controller();
-    if (typeof controller.getDescription === 'function')
-      return Iron.controller().getDescription();
-  },
   before_post_item: function () {
     return getTemplate('before_post_item');
   },

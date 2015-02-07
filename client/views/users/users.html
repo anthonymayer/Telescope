@@ -5,19 +5,15 @@
         <div class="filter-sort">
           <p class="filter">
             <span>{{_ "filter_by"}}: </span>
-            <a class="{{activeClass 'all'}}" href="{{filterBy 'all'}}">{{_ "all"}}</a>
-            <a class="{{activeClass 'invited'}}" href="{{filterBy 'invited'}}">{{_ "invited"}}</a>
-            <a class="{{activeClass 'uninvited'}}" href="{{filterBy 'uninvited'}}">{{_ "uninvited"}}</a>
-            <a class="{{activeClass 'admin'}}" href="{{filterBy 'admin'}}">{{_ "admin"}}</a>
+            {{#each filters}}
+              <a class="{{activeClass this}}" href="{{filterBy this}}">{{_ this}}</a>
+            {{/each}}
           </p>
           <p class="sort">
             <span>{{_ "sort_by"}}: </span>
-            <a class="{{activeClass 'createdAt'}}" href="{{sortBy 'createdAt'}}">{{_ "created"}}</a>
-            <a class="{{activeClass 'karma'}}" href="{{sortBy 'karma'}}">{{_ "karma"}}</a>
-            <a class="{{activeClass 'username'}}" href="{{sortBy 'username'}}">{{_ "username"}}</a>
-            <a class="{{activeClass 'postCount'}}" href="{{sortBy 'postCount'}}">{{_ "posts"}}</a>
-            <a class="{{activeClass 'commentCount'}}" href="{{sortBy 'commentCount'}}">{{_ "comments_"}}</a>
-            <a class="{{activeClass 'invitedCount'}}" href="{{sortBy 'invitedCount'}}">{{_ "invitedcount"}}</a>
+            {{#each sorts}}
+              <a class="{{activeClass key}}" href="{{sortBy key}}">{{_ textKey}}</a>
+            {{/each}}
           </p>
         </div>
         <table>
@@ -40,9 +36,11 @@
               {{/each}}
           </tbody>
         </table>
-        <div class="grid more-button {{#if allPostsLoaded}} hidden {{/if}}">
-          <a class="more-link" href="{{loadMoreUrl}}">{{_ "load_more"}}</a>
-        </div>
+        {{#if hasMore}}
+          <div class="grid more-button">
+            <a class="more-link" href="#">{{_ "load_more"}}</a>
+          </div>
+        {{/if}}
       </div>
     </div>
 </template>

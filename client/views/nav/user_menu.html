@@ -4,9 +4,9 @@
       <a class="view dropdown-top-level" href="/">{{name}}</a>
       <div class="dropdown-menu">
         <ul role="menu" aria-labelledby="dLabel">
-          <li><a href="{{profileUrl}}">{{_ "profile"}}</a></li>
-          <li><a href="{{userEditUrl}}">{{_ "edit_account"}}</a></li>
-          <li><a href="{{pathFor route='signOut'}}">{{_ "sign_out"}}</a></li>
+          {{#each dropdownItems}}
+            {{> UI.dynamic template=menuItem data=this}}
+          {{/each}}
         </ul>
       </div>
     </div>

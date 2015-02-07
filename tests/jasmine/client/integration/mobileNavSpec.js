@@ -8,7 +8,7 @@ describe('test mobile nav', function() {
     setTimeout(function () {
       expect($('.mobile-nav').css('left')).toBe('0px');
       done();
-    }, 500);
+    }, 1000);
   });
 
   it('should close when clicked outside', function (done) {
@@ -20,7 +20,7 @@ describe('test mobile nav', function() {
       var expectedLeft = width === 0 ? '60px' : '-200px';
       expect($('.mobile-nav').css('left')).toBe(expectedLeft);
       done();
-    }, 500);
+    }, 1000);
   });
 
   it('should not close when clicked inside', function (done) {
@@ -28,6 +28,6 @@ describe('test mobile nav', function() {
     setTimeout(function () {
       expect($('.mobile-nav').css('left')).toBe('0px');
       done();
-    }, 500);
+    }, 1000);
   });
 });
